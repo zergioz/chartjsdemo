@@ -26,13 +26,13 @@ export default class LineGraph extends Component {
         if (typeof myLineChart !== "undefined") myLineChart.destroy();
 
         myLineChart = new Chart(myChartRef, {
-            type: "line",
+            type: "bar",
             data: {
                 //Bring in data
                 labels: labels,
                 datasets: [
                     {
-                        label: "Sales",
+                        label: "Training",
                         data: data,
                         fill: false,
                         borderColor: "#6610f2"
@@ -53,13 +53,9 @@ export default class LineGraph extends Component {
     }
 
     render() {
-
         return (
             <div className={classes.graphContainer}>
-                <canvas
-                    id="myChart"
-                    ref={this.chartRef}
-                />
+                <canvas id="myChart" ref={this.chartRef} />
             </div>
         )
     }

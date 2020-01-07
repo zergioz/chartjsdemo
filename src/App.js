@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import YourDashboard from "./views/YourDashboard/YourDashboard";
+import Dashboard from "./views/Dashboard/Dashboard";
+import List from "./views/List/List";
 
 class App extends Component {
   render() {
     return (
-      <YourDashboard />
+      <List />
     );
   }
 }

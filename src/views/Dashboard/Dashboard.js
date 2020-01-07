@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import classes from "./Dashboard.module.css";
 import LineGraph from "../../components/Dashboard/LineGraph";
 import chartIcon from "../../assets/chart-icon.svg";
-import { managerData, nationalAverageData, yearLabels, managerQuarterData, nationalAverageQuarterData, quarterLabels } from "../../mockData";
+import  { 
+            managerData, 
+            nationalAverageData, 
+            dirLabels, 
+            managerQuarterData, 
+            nationalAverageQuarterData, 
+            trainingLabels 
+        } from "../../Data";
 
 export default class Dashboard extends Component {
     state = {
         data: managerData,
         average: nationalAverageData,
-        labels: yearLabels
+        labels: dirLabels
     }
 
     handleButtonClick = e => {
@@ -16,7 +23,7 @@ export default class Dashboard extends Component {
         const isAnnual = value === "annual";
 
         const newData = isAnnual ? managerData : managerQuarterData;
-        const newLabels = isAnnual ? yearLabels : quarterLabels;
+        const newLabels = isAnnual ? dirLabels : trainingLabels;
         const newAverage = isAnnual ? nationalAverageData : nationalAverageQuarterData;
 
         this.setState({
@@ -32,30 +39,19 @@ export default class Dashboard extends Component {
             <div className={classes.container}>
                 <header>
                     <img src={chartIcon} alt="bar chart icon" />
-                    <h1>Sales Dashboard</h1>
+                    <h1>Defense Ready Reporting Dash</h1>
                 </header>
 
                 <div className={classes.buttonContainer}>
-                    <button
-                        value="annual"
-                        onClick={this.handleButtonClick}
-                    >
-                        Annual
+                    <button  value="annual" onClick={this.handleButtonClick} >
+                        Per Director
                     </button>
 
-                    <button
-                        value="lastquarter"
-                        onClick={this.handleButtonClick}
-                    >
-                        Last Quarter
+                    <button value="lastquarter" onClick={this.handleButtonClick} >
+                        Per Training
                     </button>
                 </div>
-
-                <LineGraph
-                    data={data}
-                    average={average}
-                    labels={labels} />
-
+                <LineGraph data={data} average={average} labels={labels} />
             </div>
         )
     }
