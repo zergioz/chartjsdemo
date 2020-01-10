@@ -10,12 +10,17 @@ import  {
             nationalAverageQuarterData, 
             trainingLabels 
         } from "../../Data";
+ 
 
 export default class List extends Component {
     state = {
         data: managerData,
         average: nationalAverageData,
         labels: dirLabels
+    }
+
+    handleReturn = e =>{
+        console.log(e);
     }
 
     handleButtonClick = e => {
@@ -51,7 +56,7 @@ export default class List extends Component {
                         Per Training
                     </button>
                 </div>
-                <LineGraph data={data} average={average} labels={labels} />
+                <LineGraph data={data} average={average} labels={labels} handleReturn={this.handleReturn}/>
             </div>
         )
     }

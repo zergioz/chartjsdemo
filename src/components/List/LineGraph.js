@@ -46,7 +46,12 @@ export default class LineGraph extends Component {
                 ]
             },
             options: {
-                //Customize chart options
+                onClick: (e,x) => {
+                    if(x.length > 0){
+                        console.log('LINE');
+                        this.props.handleReturn(x[0]._model.label);
+                    }
+                }
             }
         });
 
