@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'react'
 import Chart from "chart.js";
 import classes from "./BarGraph.module.css";
 let myBarChart;
+let chartValue;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
@@ -20,7 +20,11 @@ export default class BarGraph extends Component {
     componentDidUpdate() {
         this.buildChart();
     }
-      
+    
+    handleReturn = chartValue =>{
+        console.log(chartValue);
+    }
+    
     buildChart = () => {
         const myChartRef = this.chartRef.current.getContext("2d");
         const { 
@@ -42,19 +46,14 @@ export default class BarGraph extends Component {
                         data: data,
                         fill: false,
                         borderColor: "#6610f2"
-                    },
-                    {
-                        label: "National Average",
-                        data: average,
-                        fill: false,
-                        borderColor: "#E0E0E0"
                     }
                 ]
             },
             options: {
                 onClick: (e,x) => {
                     if(x.length > 0){
-                        this.props.handleReturn(x[0]._model.label);
+                        chartValue = x[0]._model.label;
+                        this.props.handleReturn(chartValue);
                     }
                 },
                 responsive: true,

@@ -13,6 +13,7 @@ import  {
  
 
 export default class List extends Component {
+    
     state = {
         data: managerData,
         average: nationalAverageData,
@@ -38,8 +39,13 @@ export default class List extends Component {
         })
     }
 
+    handleBackClick = e =>{
+        const { value } = e.target;
+        this.props.handleReturn(value);
+    }
+
     render() {
-        const { data, average, labels } = this.state;
+        const { data, labels } = this.state;
         return (
             <div className={classes.container}>
                 <header>
@@ -48,15 +54,19 @@ export default class List extends Component {
                 </header>
 
                 <div className={classes.buttonContainer}>
+                    <button  value="root" onClick={this.handleBackClick}>
+                       GoBack
+                    </button>
+                    
                     <button  value="annual" onClick={this.handleButtonClick} >
-                        Per Director
+                        Per User
                     </button>
 
                     <button value="lastquarter" onClick={this.handleButtonClick} >
                         Per Training
                     </button>
                 </div>
-                <LineGraph data={data} average={average} labels={labels} handleReturn={this.handleReturn}/>
+                <LineGraph data={data} labels={labels} handleReturn={this.handleReturn}/>
             </div>
         )
     }

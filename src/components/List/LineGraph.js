@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Chart from "chart.js";
 import classes from "./LineGraph.module.css";
 let myLineChart;
+let chartValue;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
@@ -21,7 +22,7 @@ export default class LineGraph extends Component {
 
     buildChart = () => {
         const myChartRef = this.chartRef.current.getContext("2d");
-        const { data, average, labels } = this.props;
+        const { data, labels } = this.props;
 
         if (typeof myLineChart !== "undefined") myLineChart.destroy();
 
@@ -36,20 +37,14 @@ export default class LineGraph extends Component {
                         data: data,
                         fill: false,
                         borderColor: "#6610f2"
-                    },
-                    {
-                        label: "National Average",
-                        data: average,
-                        fill: false,
-                        borderColor: "#E0E0E0"
                     }
                 ]
             },
             options: {
                 onClick: (e,x) => {
                     if(x.length > 0){
-                        console.log('LINE');
-                        this.props.handleReturn(x[0]._model.label);
+                        chartValue = x[0]._model.label;
+                        this.props.handleReturn(chartValue);
                     }
                 }
             }
